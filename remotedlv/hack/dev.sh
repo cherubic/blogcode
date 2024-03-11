@@ -15,7 +15,7 @@ docker_start() {
         if [ "$(docker ps -aq -f status=exited -f name=remotedlv)" ]; then
             docker start remotedlv
         else
-            docker run -d --name remotedlv -p 4000:4000 -p 2345:2345 remotedlv:v0.0.1
+            docker run -d --security-opt="apparmor=unconfined" --cap-add=SYS_PTRACE --name remotedlv -p 4000:4000 -p 2345:2345 remotedlv:v0.0.1
         fi
     fi
 }
